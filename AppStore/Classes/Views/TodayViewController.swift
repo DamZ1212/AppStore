@@ -71,7 +71,6 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Setting the table view up
         appsTableView.delegate = self
         appsTableView.dataSource = self
-        appsTableView.register(UINib(nibName: "AppOfTheDayCell", bundle: Bundle.main), forCellReuseIdentifier: staticVariable.AppOfTheDayCellIdentifier)
         
         // Attach itself to the presenter for it to handle datas
         appPresenter.attachView(self)
@@ -82,6 +81,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         appsTableView.reloadData()
     }
     
+    // TableView datasource and delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: staticVariable.AppOfTheDayCellIdentifier, for: indexPath)
         if let cellData = sections[SectionType(rawValue: indexPath.section)!]?.appsData[indexPath.row], let tableCell = cell as? AppOfTheDayCell
@@ -115,18 +115,36 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         return ""
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cellData = sections[SectionType(rawValue: indexPath.section)!]?.appsData[indexPath.row]
-        {
-            let secondViewController:AppDetailsViewController = AppDetailsViewController()
-            secondViewController.setAppData(app: cellData)
-            self.present(secondViewController, animated: true, completion: nil)
-            
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
+    }
+    
+    // Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? "")
+        {
+            case "ShowAppDetail":
+                guard let appDetailsViewController = segue.destination as? AppDetailsViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                
+                guard let selectedAppCell = sender as? AppOfTheDayCell else {
+                    fatalError("Unexpected sender: \(String(describing: sender))")
+                }
+                
+                guard let indexPath = appsTableView.indexPath(for: selectedAppCell) else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                
+                if let section = sections[SectionType(rawValue: indexPath.section)!]
+                {
+                    let appDetail = section.appsData[indexPath.row]
+                    appDetailsViewController.app = appDetail
+                }
+            default:
+                fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        }
     }
 }
 

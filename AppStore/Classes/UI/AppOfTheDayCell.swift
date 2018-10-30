@@ -10,16 +10,16 @@ import UIKit
 
 class AppOfTheDayCell: UITableViewCell {
 
-    @IBOutlet weak var appIcon: UIImageView!
     @IBOutlet weak var cellTitle: UILabel!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var appIcon: UIImageView!
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var appDesc: UILabel!
     @IBOutlet weak var getButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var backgroundImage: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
         // Configuring main view
         self.contentView.layer.cornerRadius = 20
