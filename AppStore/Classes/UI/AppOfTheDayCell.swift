@@ -12,14 +12,12 @@ class AppOfTheDayCell: UITableViewCell {
 
     @IBOutlet weak var cellTitle: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var appDetailBar: AppDetailBar!
-    @IBOutlet weak var background: UIView!
     
     var model : TodayAppViewData?
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // Configuring main view
         self.contentView.layer.cornerRadius = 20
@@ -27,15 +25,17 @@ class AppOfTheDayCell: UITableViewCell {
         self.contentView.layer.masksToBounds = true
         self.contentView.clipsToBounds = true
         
-        self.bottomView.layer.cornerRadius = 20
-        self.bottomView.clipsToBounds = true
-        
         // Background
         self.backgroundImage.clipsToBounds = true
         self.backgroundImage.contentMode = ContentMode.scaleAspectFit
-        
-        // Hide everything until data is loaded
-        bottomView.isHidden = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -49,19 +49,22 @@ class AppOfTheDayCell: UITableViewCell {
         self.model = model
         if let cell_title = model.cellTitle
         {
-            self.cellTitle.text = cell_title
+            self.cellTitle.text = cell_title.uppercased()
         }
         if let background = model.backgroundImage, let url = URL(string: background)
         {
             getImage(from: url, to: self.backgroundImage)
         }
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = contentView.bounds
+        let bottomViewFrame = backgroundImage.frame
+        let blurSize = 70
+        let blurFrame = CGRect(x: 0, y: Int(bottomViewFrame.size.height) - blurSize, width: Int(bottomViewFrame.size.width), height: blurSize)
+        
+        blurEffectView.frame = blurFrame
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        background.addSubview(blurEffectView)
+        backgroundImage.addSubview(blurEffectView)
         
         appDetailBar.configure(model: model)
-        bottomView.isHidden = false
     }
 }

@@ -81,51 +81,30 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uGC-gw-sdT">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="291.66666666666669"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="299.66666666666669"/>
                                                         </imageView>
-                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCN-oY-XeF">
-                                                            <rect key="frame" x="0.0" y="233.99999999999997" width="414" height="57.666666666666657"/>
-                                                            <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1f8-yu-dDP">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="57.666666666666664"/>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cV-NA-qxR" customClass="AppDetailBar" customModule="AppStore" customModuleProvider="target">
-                                                                    <rect key="frame" x="8" y="8" width="398" height="41.666666666666664"/>
-                                                                </view>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="1cV-NA-qxR" firstAttribute="leading" secondItem="Fhg-NZ-SOp" secondAttribute="leading" constant="8" id="GnN-Lg-lXC"/>
-                                                                <constraint firstItem="1f8-yu-dDP" firstAttribute="leading" secondItem="Fhg-NZ-SOp" secondAttribute="leading" id="IGd-OA-XMi"/>
-                                                                <constraint firstItem="1f8-yu-dDP" firstAttribute="top" secondItem="oCN-oY-XeF" secondAttribute="top" id="Iot-h0-oef"/>
-                                                                <constraint firstItem="Fhg-NZ-SOp" firstAttribute="trailing" secondItem="1f8-yu-dDP" secondAttribute="trailing" id="J98-FL-Rna"/>
-                                                                <constraint firstItem="Fhg-NZ-SOp" firstAttribute="bottom" secondItem="1cV-NA-qxR" secondAttribute="bottom" constant="8" id="LrZ-m7-vkT"/>
-                                                                <constraint firstItem="Fhg-NZ-SOp" firstAttribute="trailing" secondItem="1cV-NA-qxR" secondAttribute="trailing" constant="8" id="Skv-k6-WSF"/>
-                                                                <constraint firstItem="1cV-NA-qxR" firstAttribute="centerY" secondItem="oCN-oY-XeF" secondAttribute="centerY" id="buN-KA-Nc6"/>
-                                                                <constraint firstAttribute="bottom" secondItem="1f8-yu-dDP" secondAttribute="bottom" id="rd7-jj-Nzt"/>
-                                                            </constraints>
-                                                            <viewLayoutGuide key="safeArea" id="Fhg-NZ-SOp"/>
-                                                        </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tZ-Cu-gdm">
-                                                            <rect key="frame" x="18" y="80.666666666666671" width="194" height="138.33333333333331"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="194" id="7mZ-jH-aR4"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                                            <nil key="textColor"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8tZ-Cu-gdm">
+                                                            <rect key="frame" x="9" y="98" width="194" height="133"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="40"/>
+                                                            <color key="textColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cV-NA-qxR" customClass="AppDetailBar" customModule="AppStore" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="238.99999999999997" width="398" height="52.666666666666657"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="0.01164490638" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="uGC-gw-sdT" firstAttribute="trailing" secondItem="oCN-oY-XeF" secondAttribute="trailing" id="10m-qf-4mh"/>
-                                                        <constraint firstItem="oCN-oY-XeF" firstAttribute="top" secondItem="hzi-fr-qz1" secondAttribute="top" constant="234" id="63T-wm-vfS"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="oCN-oY-XeF" secondAttribute="bottom" id="77d-KZ-kc3"/>
-                                                        <constraint firstItem="uGC-gw-sdT" firstAttribute="leading" secondItem="oCN-oY-XeF" secondAttribute="leading" id="9IB-oh-Mii"/>
-                                                        <constraint firstItem="oCN-oY-XeF" firstAttribute="top" secondItem="8tZ-Cu-gdm" secondAttribute="bottom" constant="15" id="PdO-XO-hcz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="uGC-gw-sdT" secondAttribute="trailing" id="2zH-hY-gHY"/>
+                                                        <constraint firstAttribute="bottom" secondItem="1cV-NA-qxR" secondAttribute="bottom" constant="8" id="BNX-eK-IGW"/>
+                                                        <constraint firstAttribute="bottom" secondItem="uGC-gw-sdT" secondAttribute="bottom" id="Bji-LG-mZL"/>
+                                                        <constraint firstItem="uGC-gw-sdT" firstAttribute="leading" secondItem="hzi-fr-qz1" secondAttribute="leading" id="I2A-75-KWK"/>
+                                                        <constraint firstItem="1cV-NA-qxR" firstAttribute="leading" secondItem="hzi-fr-qz1" secondAttribute="leading" constant="8" id="IzY-xd-I6W"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1cV-NA-qxR" secondAttribute="trailing" constant="8" id="PIr-xA-vgc"/>
                                                         <constraint firstItem="uGC-gw-sdT" firstAttribute="top" secondItem="hzi-fr-qz1" secondAttribute="top" id="RQh-Fp-Ifi"/>
-                                                        <constraint firstItem="8tZ-Cu-gdm" firstAttribute="centerY" secondItem="hzi-fr-qz1" secondAttribute="centerY" id="YOP-wz-Mtm"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="uGC-gw-sdT" secondAttribute="bottom" id="cdH-OD-RMh"/>
-                                                        <constraint firstItem="8tZ-Cu-gdm" firstAttribute="leading" secondItem="hzi-fr-qz1" secondAttribute="leadingMargin" constant="10" id="mTr-Gl-9on"/>
+                                                        <constraint firstItem="1cV-NA-qxR" firstAttribute="top" secondItem="hzi-fr-qz1" secondAttribute="top" constant="239" id="SQ4-nh-5BM"/>
+                                                        <constraint firstItem="uGC-gw-sdT" firstAttribute="top" secondItem="hzi-fr-qz1" secondAttribute="top" id="kDR-UP-U77"/>
                                                         <constraint firstAttribute="trailing" secondItem="uGC-gw-sdT" secondAttribute="trailing" id="nF2-kQ-geP"/>
                                                         <constraint firstItem="uGC-gw-sdT" firstAttribute="leading" secondItem="hzi-fr-qz1" secondAttribute="leading" id="xc2-Gj-XMH"/>
                                                     </constraints>
@@ -133,10 +112,7 @@
                                                 <viewLayoutGuide key="safeArea" id="vxQ-0B-cMq"/>
                                                 <connections>
                                                     <outlet property="appDetailBar" destination="1cV-NA-qxR" id="pU2-Xy-xk2"/>
-                                                    <outlet property="background" destination="1f8-yu-dDP" id="Tm4-HB-zxg"/>
                                                     <outlet property="backgroundImage" destination="uGC-gw-sdT" id="8Tb-Qj-hLH"/>
-                                                    <outlet property="backgroundView" destination="1f8-yu-dDP" id="dr4-ca-zCK"/>
-                                                    <outlet property="bottomView" destination="oCN-oY-XeF" id="FZl-yX-xRw"/>
                                                     <outlet property="cellTitle" destination="8tZ-Cu-gdm" id="M12-Fk-gwq"/>
                                                     <segue destination="Lvy-eJ-LhM" kind="show" identifier="ShowAppDetail" id="gSJ-lX-QpF"/>
                                                 </connections>
