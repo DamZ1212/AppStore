@@ -10,13 +10,9 @@ import UIKit
 
 class AppDetailsViewController: UIViewController {
 
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var detailsTitle: UILabel!
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var appName: UILabel!
-    @IBOutlet weak var appDesc: UILabel!
-    @IBOutlet weak var getButton: UIButton!
+    @IBOutlet weak var appDetailBar: AppDetailBar!
     
     var app : TodayAppViewData?
     
@@ -25,19 +21,6 @@ class AppDetailsViewController: UIViewController {
         
         if let app = self.app
         {
-            // download all the stuff we need
-            if let title = app.title
-            {
-                appName.text = title
-            }
-            if let description = app.description
-            {
-                appDesc.text = description
-            }
-            if let iconPath = app.icon, let url = URL(string: iconPath)
-            {
-                getImage(from: url, to: icon)
-            }
             if let cellTitle = app.cellTitle
             {
                 detailsTitle.text = cellTitle
@@ -46,6 +29,7 @@ class AppDetailsViewController: UIViewController {
             {
                 getImage(from: url, to: backgroundImage)
             }
+            appDetailBar.configure(model: app)
         }
     }
     

@@ -8,14 +8,22 @@
 
 import UIKit
 
+protocol AppDetailBarDelegate
+{
+    func finishedLoading()
+}
+
 class AppDetailBar: UIView {
 
     @IBOutlet weak var appIcon: UIImageView!
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var appDesc: UILabel!
     @IBOutlet weak var getButton: UIButton!
+    @IBOutlet var contentView: UIView!
+    
+    var delegate : AppDetailBarDelegate?
     /*
-    // Only override draw() if you perform custom drawing.
+    // Only override draw() if you perform custom dra?wing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
@@ -24,10 +32,45 @@ class AppDetailBar: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit()
+    {
+        Bundle.main.loadNibNamed("AppDetailBar", owner: self, options: nil)
+        addSubview(contentView)
+        contentView.frame = self.bounds
+        contentView.autoresizingMask = [.flexibleWidth]
+        
+        // Configuring the get button
+        self.getButton.layer.cornerRadius = 10
+        self.getButton.clipsToBounds = true
+        self.getButton.backgroundColor = UIColor.blue
+        
+        // App Icon
+        self.appIcon.layer.cornerRadius = 15
+        self.appIcon.clipsToBounds = true
+    }
+    
+    func configure(model : TodayAppViewData)
+    {
+        if let title = model.title
+        {
+            self.appTitle.text = title
+        }
+        if let description = model.description
+        {
+            self.appDesc.text = description
+        }
+        if let icon = model.icon, let url = URL(string: icon)
+        {
+            getImage(from: url, to: self.appIcon)
+        }
     }
 
 }

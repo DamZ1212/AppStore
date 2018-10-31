@@ -14,31 +14,34 @@
                 <outlet property="appDesc" destination="O7c-NU-OoK" id="NGC-5Q-UIb"/>
                 <outlet property="appIcon" destination="ryf-2L-z72" id="Qvn-kE-7vx"/>
                 <outlet property="appTitle" destination="DoH-u3-iWn" id="Fi2-w8-Wdw"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="MAK-f9-Uyo"/>
                 <outlet property="getButton" destination="OEm-bL-2FK" id="9oR-ak-cHf"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="327" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ryf-2L-z72">
                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="50" id="FdQ-3d-zlW"/>
                         <constraint firstAttribute="width" constant="50" id="cb7-Vc-xem"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="iYw-RC-oP1"/>
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3UK-Ud-u7a">
-                    <rect key="frame" x="50" y="0.0" width="225" height="50"/>
+                    <rect key="frame" x="55" y="0.0" width="167" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEST" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoH-u3-iWn">
-                            <rect key="frame" x="0.0" y="0.0" width="225" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="167" height="30"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7c-NU-OoK">
-                            <rect key="frame" x="0.0" y="30" width="225" height="20"/>
+                            <rect key="frame" x="0.0" y="30" width="167" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="163-kR-tNg"/>
                             </constraints>
@@ -50,7 +53,7 @@
                     <viewLayoutGuide key="safeArea" id="FLO-eT-Q4p"/>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEm-bL-2FK">
-                    <rect key="frame" x="275" y="0.0" width="100" height="50"/>
+                    <rect key="frame" x="227" y="0.0" width="100" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="h4k-bk-Ngv"/>
                     </constraints>
@@ -59,7 +62,6 @@
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="OEm-bL-2FK" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="1ns-RV-QvW"/>
                 <constraint firstAttribute="trailing" secondItem="OEm-bL-2FK" secondAttribute="trailing" id="CLk-AM-4Tt"/>
@@ -69,13 +71,13 @@
                 <constraint firstItem="3UK-Ud-u7a" firstAttribute="top" secondItem="ryf-2L-z72" secondAttribute="top" id="YUZ-sB-DXW"/>
                 <constraint firstItem="ryf-2L-z72" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="bxq-Ul-hgi"/>
                 <constraint firstItem="OEm-bL-2FK" firstAttribute="top" secondItem="ryf-2L-z72" secondAttribute="top" id="fHN-Yu-Qq3"/>
-                <constraint firstItem="3UK-Ud-u7a" firstAttribute="leading" secondItem="ryf-2L-z72" secondAttribute="trailing" id="kfX-pZ-wcs"/>
+                <constraint firstItem="3UK-Ud-u7a" firstAttribute="leading" secondItem="ryf-2L-z72" secondAttribute="trailing" constant="5" id="kfX-pZ-wcs"/>
                 <constraint firstItem="OEm-bL-2FK" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="rlX-gc-3GT"/>
-                <constraint firstItem="OEm-bL-2FK" firstAttribute="leading" secondItem="3UK-Ud-u7a" secondAttribute="trailing" id="sSn-6J-K3T"/>
+                <constraint firstItem="OEm-bL-2FK" firstAttribute="leading" secondItem="3UK-Ud-u7a" secondAttribute="trailing" constant="5" id="sSn-6J-K3T"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="138.40000000000001" y="386.8065967016492"/>
+            <point key="canvasLocation" x="100" y="386.8065967016492"/>
         </view>
     </objects>
 </document>

@@ -12,11 +12,11 @@ class AppOfTheDayCell: UITableViewCell {
 
     @IBOutlet weak var cellTitle: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var appIcon: UIImageView!
-    @IBOutlet weak var appTitle: UILabel!
-    @IBOutlet weak var appDesc: UILabel!
-    @IBOutlet weak var getButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var appDetailBar: AppDetailBar!
+    @IBOutlet weak var background: UIView!
+    
+    var model : TodayAppViewData?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -29,15 +29,6 @@ class AppOfTheDayCell: UITableViewCell {
         
         self.bottomView.layer.cornerRadius = 20
         self.bottomView.clipsToBounds = true
-        
-        // Configuring the get button
-        self.getButton.layer.cornerRadius = 10
-        self.getButton.clipsToBounds = true
-        self.getButton.backgroundColor = UIColor.blue
-        
-        // App Icon
-        self.appIcon.layer.cornerRadius = 15
-        self.appIcon.clipsToBounds = true
         
         // Background
         self.backgroundImage.clipsToBounds = true
@@ -55,18 +46,7 @@ class AppOfTheDayCell: UITableViewCell {
     
     func configure(model : TodayAppViewData)
     {
-        if let title = model.title
-        {
-            self.appTitle.text = title
-        }
-        if let description = model.description
-        {
-            self.appDesc.text = description
-        }
-        if let icon = model.icon, let url = URL(string: icon)
-        {
-            getImage(from: url, to: self.appIcon)
-        }
+        self.model = model
         if let cell_title = model.cellTitle
         {
             self.cellTitle.text = cell_title
@@ -75,6 +55,13 @@ class AppOfTheDayCell: UITableViewCell {
         {
             getImage(from: url, to: self.backgroundImage)
         }
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = contentView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        background.addSubview(blurEffectView)
+        
+        appDetailBar.configure(model: model)
         bottomView.isHidden = false
     }
 }
