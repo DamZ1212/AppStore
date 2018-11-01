@@ -10,6 +10,7 @@ import UIKit
 
 struct staticVariable {
     static let AppOfTheDayCellIdentifier = "AppOfTheDay"
+    static let ShowAppDetailSegue = "ShowAppDetail"
 }
 
 class TodayViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -47,7 +48,8 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Setup this bage page view title
         pageTitleName = "today"
-        sections[SectionType.AppOfTheDay] = Section(title: "Apps of the day")
+        
+        sections[SectionType.AppOfTheDay] = Section(title: "App of the day")
         sections[SectionType.GameOfTheDay] = Section(title: "Game of the day")
     }
     
@@ -78,7 +80,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        appsTableView.reloadData()
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     // TableView datasource and delegate
@@ -124,7 +126,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? "")
         {
-            case "ShowAppDetail":
+            case staticVariable.ShowAppDetailSegue:
                 guard let appDetailsViewController = segue.destination as? AppDetailsViewController else {
                     fatalError("Unexpected destination: \(segue.destination)")
                 }
@@ -145,6 +147,10 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
             default:
                 fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
+    }
+    
+    @IBAction func unwindToAppOfTheDay(sender: UIStoryboardSegue)
+    {
     }
 }
 

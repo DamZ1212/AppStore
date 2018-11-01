@@ -15,6 +15,7 @@ struct TodayAppViewData
     let description : String?
     let cellTitle : String?
     let backgroundImage : String?
+    let price : String?
 }
 
 protocol TodayAppsView : NSObjectProtocol
@@ -56,7 +57,7 @@ class TodayAppsPresenter
                         if let icon = app.storeInfo?.icon, let title = app.storeInfo?.title, let description = app.storeInfo?.description
                         {
                             let screenshot = app.getFirstAvailableScreenShot()
-                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "Game Of The Day", backgroundImage: screenshot?.url)
+                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "Game Of The Day", backgroundImage: screenshot?.url, price: app.storeInfo?.price)
                             self?.todayAppsView?.setGameOfTheDay(mappedGame)
                         }
                     })
@@ -71,7 +72,7 @@ class TodayAppsPresenter
                         if let icon = app.storeInfo?.icon, let title = app.storeInfo?.title, let description = app.storeInfo?.description
                         {
                             let screenshot = app.getFirstAvailableScreenShot()
-                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "App Of The Day", backgroundImage: screenshot?.url)
+                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "App Of The Day", backgroundImage: screenshot?.url, price: app.storeInfo?.price)
                             self?.todayAppsView?.setAppOfTheDay(mappedGame)
                         }
                     })

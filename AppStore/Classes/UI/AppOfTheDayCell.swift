@@ -14,7 +14,9 @@ class AppOfTheDayCell: UITableViewCell {
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var appDetailBar: AppDetailBar!
     
+    
     var model : TodayAppViewData?
+    var blur : UIVisualEffectView?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,15 +57,18 @@ class AppOfTheDayCell: UITableViewCell {
         {
             getImage(from: url, to: self.backgroundImage)
         }
+        
+        blur?.removeFromSuperview()
+        
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
         let bottomViewFrame = backgroundImage.frame
         let blurSize = 70
-        let blurFrame = CGRect(x: 0, y: Int(bottomViewFrame.size.height) - blurSize, width: Int(bottomViewFrame.size.width), height: blurSize)
+        let blurFrame = CGRect(x: 0, y: Int(bottomViewFrame.size.height) - blurSize + 1, width: Int(bottomViewFrame.size.width), height: blurSize)
         
-        blurEffectView.frame = blurFrame
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundImage.addSubview(blurEffectView)
+        blur = UIVisualEffectView(effect: blurEffect)
+        blur!.frame = blurFrame
+        blur!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundImage.addSubview(blur!)
         
         appDetailBar.configure(model: model)
     }

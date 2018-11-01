@@ -48,9 +48,9 @@ class AppDetailBar: UIView {
         contentView.autoresizingMask = [.flexibleWidth]
         
         // Configuring the get button
-        self.getButton.layer.cornerRadius = 10
+        self.getButton.layer.cornerRadius = self.getButton.frame.size.height * 0.5
         self.getButton.clipsToBounds = true
-        self.getButton.backgroundColor = UIColor.blue
+        self.getButton.backgroundColor = UIColor.white
         
         // App Icon
         self.appIcon.layer.cornerRadius = 15
@@ -71,6 +71,11 @@ class AppDetailBar: UIView {
         {
             getImage(from: url, to: self.appIcon)
         }
+        if let price = model.price, let label = self.getButton.titleLabel
+        {
+            label.text = price
+        }
+        
     }
 
 }
