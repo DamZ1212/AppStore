@@ -9,13 +9,11 @@
 import UIKit
 
 class AppDetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var detailsTitle: UILabel!
-    @IBOutlet weak var appDetailBar: AppDetailBar!
+    @IBOutlet weak var appDetailsBar: AppDetailBar!
     @IBOutlet weak var appDescription: UILabel!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var detailsTitle: UILabel!
     
     var app : TodayAppViewData?
     var blur : UIVisualEffectView?
@@ -50,7 +48,7 @@ class AppDetailsViewController: UIViewController {
             blur!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             backgroundImage.addSubview(blur!)
             
-            appDetailBar.configure(model: app)
+            appDetailsBar.configure(model: app)
             
             //scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: appDescription.frame.origin.y)
         }
