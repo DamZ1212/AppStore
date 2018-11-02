@@ -71,16 +71,18 @@ class AppTweakRequest
 class TopAppsRequest : AppTweakRequest, Request
 {
     var category : Int = Category.all.rawValue
+    var amount : Int
     var type : String = "free"
     
-    init(category : Int) {
+    init(category : Int, amount : Int = 10) {
         self.category = category
+        self.amount = amount
     }
     
     func getURL() -> URL?
     {
         var url = AppTweakRequester.baseURL
-        url += "categories/\(self.category)/top.json?country=\(self.country)&langage=\(self.langage)&device=\(self.device)&type=\(self.type)"
+        url += "categories/\(self.category)/top.json?country=\(self.country)&langage=\(self.langage)&device=\(self.device)&type=\(self.type)&num=\(amount)"
         return URL(string: url)
     }
 }

@@ -22,6 +22,7 @@ class AppDetailBar: UIView {
     @IBOutlet var contentView: UIView!
     
     var delegate : AppDetailBarDelegate?
+    var model : TodayAppViewData?
     /*
     // Only override draw() if you perform custom dra?wing.
     // An empty implementation adversely affects performance during animation.
@@ -57,8 +58,26 @@ class AppDetailBar: UIView {
         self.appIcon.clipsToBounds = true
     }
     
+    @IBAction func getButtonPressed(_ sender: Any) {
+        if let url = self.model?.appStoreURL
+        {
+            guard let url = URL(string: url) else {
+                return
+            }
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            else
+            {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
     func configure(model : TodayAppViewData)
     {
+        self.model = model
+        
         if let title = model.title
         {
             self.appTitle.text = title
@@ -69,7 +88,9 @@ class AppDetailBar: UIView {
         }
         if let icon = model.icon, let url = URL(string: icon)
         {
-            getImage(from: url, to: self.appIcon)
+            getImage(from: url, callback: {image in
+                self.appIcon.image = image
+            })
         }
         if let price = model.price, let label = self.getButton.titleLabel
         {

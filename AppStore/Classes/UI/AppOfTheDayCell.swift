@@ -53,9 +53,11 @@ class AppOfTheDayCell: UITableViewCell {
         {
             self.cellTitle.text = cell_title.uppercased()
         }
-        if let background = model.backgroundImage, let url = URL(string: background)
+        if let screenshot = model.screenshots?[0].url, let url = URL(string: screenshot)
         {
-            getImage(from: url, to: self.backgroundImage)
+            getImage(from: url, callback: {image in
+                self.backgroundImage.image = image
+            })
         }
         
         blur?.removeFromSuperview()

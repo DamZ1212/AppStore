@@ -14,15 +14,23 @@ func getDataFromURL(from url: URL, completion: @escaping (Data?, URLResponse?, E
     URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
 }
 
-func getImage(from url: URL, to container: UIImageView?) {
+func getImage(from url: URL, callback: @escaping ((UIImage?) -> Void) = { image in return }) {
     getDataFromURL(from: url) { data, response, error in
         guard let data = data, error == nil else { return }
         DispatchQueue.main.async() {
-            if (container != nil)
-            {
-                container!.image = UIImage(data: data)
-            }
+            callback(UIImage(data: data))
         }
     }
+}
+
+func getDeviceModelType() -> String
+{
+    let model = UIDevice.current.model
+    return model.lowercased()
+}
+
+func getAppStoreAppURL(country : String, name : String, id : String) -> String
+{
+    return String("http://itunes.apple.com/\(country.lowercased())/app/\(name)/id\(id)?mt=8")
 }
 

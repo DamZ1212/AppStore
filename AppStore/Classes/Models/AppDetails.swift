@@ -105,7 +105,7 @@ class AppDetails
             var release_note : String?
         }
         
-        enum Device : String
+        enum Device : String, CaseIterable
         {
             case ipad           = "ipad"
             case ipod           = "ipod"
@@ -113,6 +113,13 @@ class AppDetails
             case iphone5        = "iphone5"
             case iphone6        = "iphone6"
             case iphone6plus    = "iphone6plus"
+        }
+        
+        enum Feature : String
+        {
+            case game_center    = "game_center"
+            case passbook       = "passbook"
+            case in_apps        = "in_apps"
         }
         
         var versions : [Version]?
@@ -125,6 +132,7 @@ class AppDetails
         var price : String?
         var screenshots : [Device:[Screenshot]]?
         var release_date: String?
+        var features: [Feature:Bool]?
         
         mutating func parseFromJSON(json : [String:Any])
         {
@@ -193,6 +201,34 @@ class AppDetails
                             self.screenshots![device]?.append(screenshot)
                         }
                     }
+                }
+            }
+            if let features = json["features"] as? [String:Any]
+            {
+                self.features = [Feature:Bool]()
+                if let game_center = features["game_center"] as? Bool
+                {
+                    self.features![Feature.game_center] = game_center
+                }
+                else
+                {
+                    self.features![Feature.game_center] = false
+                }
+                if let passbook = features["passbook"] as? Bool
+                {
+                    self.features![Feature.passbook] = passbook
+                }
+                else
+                {
+                    self.features![Feature.passbook] = false
+                }
+                if let in_apps = features["in_apps"] as? Bool
+                {
+                    self.features![Feature.in_apps] = in_apps
+                }
+                else
+                {
+                    self.features![Feature.in_apps] = false
                 }
             }
         }
@@ -270,5 +306,17 @@ class AppDetails
             }
         }
         return nil
+    }
+    
+    func getAvailableScreenshotsByType(device: String) -> [Screenshot]?
+    {
+        var screenshots : [Screenshot]? = nil
+        AppDetails.StoreInfo.Device.allCases.forEach{ aDevice in
+            if aDevice.rawValue.contains(device), let empty = storeInfo?.screenshots?[aDevice]?.isEmpty, !empty
+            {
+                screenshots = storeInfo!.screenshots![aDevice]!
+            }
+        }
+        return screenshots
     }
 }

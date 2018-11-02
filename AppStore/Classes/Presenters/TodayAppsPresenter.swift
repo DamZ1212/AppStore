@@ -14,8 +14,9 @@ struct TodayAppViewData
     let title : String?
     let description : String?
     let cellTitle : String?
-    let backgroundImage : String?
+    let screenshots : [AppDetails.Screenshot]?
     let price : String?
+    let appStoreURL : String?
 }
 
 protocol TodayAppsView : NSObjectProtocol
@@ -56,8 +57,13 @@ class TodayAppsPresenter
                     self?.appService.getAppData(app_id: app_id, { (app : AppDetails) in
                         if let icon = app.storeInfo?.icon, let title = app.storeInfo?.title, let description = app.storeInfo?.description
                         {
-                            let screenshot = app.getFirstAvailableScreenShot()
-                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "Game Of The Day", backgroundImage: screenshot?.url, price: app.storeInfo?.price)
+                            var appStoreURL : String?
+                            if let locale = Locale.current.regionCode, let slug = app.storeInfo?.slug, let app_id = app.application_id
+                            {
+                                appStoreURL = getAppStoreAppURL(country: locale, name: slug, id: String(app_id))
+                            }
+                            let screenshots = app.getAvailableScreenshotsByType(device: getDeviceModelType())
+                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "Game Of The Day", screenshots: screenshots, price: app.storeInfo?.price, appStoreURL: appStoreURL)
                             self?.todayAppsView?.setGameOfTheDay(mappedGame)
                         }
                     })
@@ -71,8 +77,13 @@ class TodayAppsPresenter
                     self?.appService.getAppData(app_id: app_id, { (app : AppDetails) in
                         if let icon = app.storeInfo?.icon, let title = app.storeInfo?.title, let description = app.storeInfo?.description
                         {
-                            let screenshot = app.getFirstAvailableScreenShot()
-                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "App Of The Day", backgroundImage: screenshot?.url, price: app.storeInfo?.price)
+                            var appStoreURL : String?
+                            if let locale = Locale.current.regionCode, let slug = app.storeInfo?.slug, let app_id = app.application_id
+                            {
+                                appStoreURL = getAppStoreAppURL(country: locale, name: slug, id: String(app_id))
+                            }
+                            let screenshots = app.getAvailableScreenshotsByType(device: getDeviceModelType())
+                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "App Of The Day", screenshots: screenshots, price: app.storeInfo?.price, appStoreURL: appStoreURL)
                             self?.todayAppsView?.setAppOfTheDay(mappedGame)
                         }
                     })

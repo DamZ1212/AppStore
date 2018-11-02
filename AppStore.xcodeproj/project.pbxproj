@@ -29,6 +29,14 @@
 		6D4A3E392182645E004671B2 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A3E372182645E004671B2 /* AppDetails.swift */; };
 		6D4A3E3B21826A0E004671B2 /* TodayAppsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A3E3A21826A0E004671B2 /* TodayAppsService.swift */; };
 		6D4A3E3C21826A0E004671B2 /* TodayAppsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A3E3A21826A0E004671B2 /* TodayAppsService.swift */; };
+		6DB1FA37218C985400A48F3F /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA36218C985400A48F3F /* GamesViewController.swift */; };
+		6DB1FA38218C985400A48F3F /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA36218C985400A48F3F /* GamesViewController.swift */; };
+		6DB1FA3A218C9B5800A48F3F /* NewGamesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA39218C9B5800A48F3F /* NewGamesCell.swift */; };
+		6DB1FA3B218C9B5800A48F3F /* NewGamesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA39218C9B5800A48F3F /* NewGamesCell.swift */; };
+		6DB1FA3D218C9C6C00A48F3F /* NewGamesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA3C218C9C6C00A48F3F /* NewGamesPresenter.swift */; };
+		6DB1FA3E218C9C6C00A48F3F /* NewGamesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA3C218C9C6C00A48F3F /* NewGamesPresenter.swift */; };
+		6DB1FA40218C9D4400A48F3F /* NewGamesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA3F218C9D4400A48F3F /* NewGamesService.swift */; };
+		6DB1FA41218C9D4400A48F3F /* NewGamesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA3F218C9D4400A48F3F /* NewGamesService.swift */; };
 		6DC936AE218275C500B6001C /* TodayAppsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */; };
 		6DC936AF218275C500B6001C /* TodayAppsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */; };
 		6DC936B221864F1400B6001C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC936B121864F1400B6001C /* Utils.swift */; };
@@ -66,6 +74,10 @@
 		6D4A3E312181BB4C004671B2 /* AppOfTheDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOfTheDayCell.swift; sourceTree = "<group>"; };
 		6D4A3E372182645E004671B2 /* AppDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetails.swift; sourceTree = "<group>"; };
 		6D4A3E3A21826A0E004671B2 /* TodayAppsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodayAppsService.swift; path = Services/TodayAppsService.swift; sourceTree = "<group>"; };
+		6DB1FA36218C985400A48F3F /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
+		6DB1FA39218C9B5800A48F3F /* NewGamesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGamesCell.swift; sourceTree = "<group>"; };
+		6DB1FA3C218C9C6C00A48F3F /* NewGamesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewGamesPresenter.swift; path = Presenters/NewGamesPresenter.swift; sourceTree = "<group>"; };
+		6DB1FA3F218C9D4400A48F3F /* NewGamesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewGamesService.swift; path = Services/NewGamesService.swift; sourceTree = "<group>"; };
 		6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodayAppsPresenter.swift; path = Presenters/TodayAppsPresenter.swift; sourceTree = "<group>"; };
 		6DC936B121864F1400B6001C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +168,7 @@
 				6D4A3E312181BB4C004671B2 /* AppOfTheDayCell.swift */,
 				6D2EAEAF218917C20051D072 /* AppDetailBar.xib */,
 				6D2EAEB221891C0E0051D072 /* AppDetailBar.swift */,
+				6DB1FA39218C9B5800A48F3F /* NewGamesCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -165,6 +178,7 @@
 			children = (
 				6D3274192180AA77003EAEAD /* TodayViewController.swift */,
 				6D2EAEA02188A35A0051D072 /* AppDetailsViewController.swift */,
+				6DB1FA36218C985400A48F3F /* GamesViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +198,7 @@
 			children = (
 				6D4A3E3A21826A0E004671B2 /* TodayAppsService.swift */,
 				6D2EAE8D2187B79F0051D072 /* AppService.swift */,
+				6DB1FA3F218C9D4400A48F3F /* NewGamesService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -192,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */,
+				6DB1FA3C218C9C6C00A48F3F /* NewGamesPresenter.swift */,
 			);
 			name = Presenters;
 			sourceTree = "<group>";
@@ -299,11 +315,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DB1FA37218C985400A48F3F /* GamesViewController.swift in Sources */,
+				6DB1FA40218C9D4400A48F3F /* NewGamesService.swift in Sources */,
+				6DB1FA3D218C9C6C00A48F3F /* NewGamesPresenter.swift in Sources */,
 				6D2EAEB321891C0E0051D072 /* AppDetailBar.swift in Sources */,
 				6D3273E321807830003EAEAD /* AppDelegate.swift in Sources */,
 				6D4A3E3B21826A0E004671B2 /* TodayAppsService.swift in Sources */,
 				6D3274172180AA68003EAEAD /* LineView.swift in Sources */,
 				6D2EAE902187CB270051D072 /* AppInfo.swift in Sources */,
+				6DB1FA3A218C9B5800A48F3F /* NewGamesCell.swift in Sources */,
 				6D3274202180AA77003EAEAD /* TodayViewController.swift in Sources */,
 				6DC936AE218275C500B6001C /* TodayAppsPresenter.swift in Sources */,
 				6D2EAE8E2187B79F0051D072 /* AppService.swift in Sources */,
@@ -319,11 +339,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DB1FA41218C9D4400A48F3F /* NewGamesService.swift in Sources */,
 				6D4A3E3C21826A0E004671B2 /* TodayAppsService.swift in Sources */,
 				6DC936AF218275C500B6001C /* TodayAppsPresenter.swift in Sources */,
 				6D4A3E342181BB4C004671B2 /* AppOfTheDayCell.swift in Sources */,
 				6D4A3E392182645E004671B2 /* AppDetails.swift in Sources */,
+				6DB1FA38218C985400A48F3F /* GamesViewController.swift in Sources */,
+				6DB1FA3E218C9C6C00A48F3F /* NewGamesPresenter.swift in Sources */,
 				6D3273FA21807832003EAEAD /* AppStoreTests.swift in Sources */,
+				6DB1FA3B218C9B5800A48F3F /* NewGamesCell.swift in Sources */,
 				6D2EAEA22188A35A0051D072 /* AppDetailsViewController.swift in Sources */,
 				6D2EAEB421891C0E0051D072 /* AppDetailBar.swift in Sources */,
 				6DC936B321864F1400B6001C /* Utils.swift in Sources */,

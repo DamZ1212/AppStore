@@ -106,6 +106,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // parameter ?
         return 300
     }
     
@@ -151,6 +152,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func unwindToAppOfTheDay(sender: UIStoryboardSegue)
     {
+        self.tabBarController?.tabBar.isHidden = false
     }
 }
 
