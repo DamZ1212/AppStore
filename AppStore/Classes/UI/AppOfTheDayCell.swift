@@ -72,6 +72,13 @@ class AppOfTheDayCell: UITableViewCell {
         blur!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundImage.addSubview(blur!)
         
-        appDetailBar.configure(model: model)
+        if let details = model.details
+        {
+            appDetailBar.configure(model: details)
+        }
+        else
+        {
+            appDetailBar.isHidden = true
+        }
     }
 }

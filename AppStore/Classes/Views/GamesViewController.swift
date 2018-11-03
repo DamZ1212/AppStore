@@ -10,23 +10,27 @@ import UIKit
 
 class GamesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    struct staticVariable {
-        static let NewGamesCellIdentifier = "NewGames"
-    }
+    private let kNewGamesCellIdentifier = "NewGames"
     
-    @IBOutlet weak var pageTitleName: UILabel!
+    @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    var newGames : [GameDetailViewData]?
+    
+    private var newGames : [AppDetailViewData]?
     
     fileprivate let gamesPresenter = NewGamesPresenter(newGamesService: NewGamesService(), appService: AppService())
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let title = "games"
+        pageTitle.text = String(title.prefix(1)).uppercased() + title.suffix(title.count - 1)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         // Attach itself to the presenter for it to handle datas
         gamesPresenter.attachView(self)
         gamesPresenter.getNewGames()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -42,7 +46,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
     */
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: staticVariable.NewGamesCellIdentifier, for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: kNewGamesCellIdentifier, for: indexPath)
         if let tableCell = cell as? NewGamesCell, let newGames = newGames
         {
             tableCell.configure(games: newGames)
@@ -60,7 +64,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return 200
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -75,11 +79,11 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
 
 extension GamesViewController: NewGamesView {
     
-    func setGames(_ games: [GameDetailViewData]) {
+    func setGames(_ games: [AppDetailViewData]) {
         self.newGames = games
 //        sections[SectionType.GameOfTheDay]?.appsData.append(app)
 //        appsTableView?.isHidden = false
-//        appsTableView?.reloadData()
+        tableView?.reloadData()
     }
     
     

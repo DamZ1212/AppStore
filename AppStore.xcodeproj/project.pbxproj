@@ -37,6 +37,8 @@
 		6DB1FA3E218C9C6C00A48F3F /* NewGamesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA3C218C9C6C00A48F3F /* NewGamesPresenter.swift */; };
 		6DB1FA40218C9D4400A48F3F /* NewGamesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA3F218C9D4400A48F3F /* NewGamesService.swift */; };
 		6DB1FA41218C9D4400A48F3F /* NewGamesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA3F218C9D4400A48F3F /* NewGamesService.swift */; };
+		6DB1FA43218D09A800A48F3F /* AppPresenterBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA42218D09A800A48F3F /* AppPresenterBase.swift */; };
+		6DB1FA44218D09A800A48F3F /* AppPresenterBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB1FA42218D09A800A48F3F /* AppPresenterBase.swift */; };
 		6DC936AE218275C500B6001C /* TodayAppsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */; };
 		6DC936AF218275C500B6001C /* TodayAppsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */; };
 		6DC936B221864F1400B6001C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC936B121864F1400B6001C /* Utils.swift */; };
@@ -78,6 +80,7 @@
 		6DB1FA39218C9B5800A48F3F /* NewGamesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGamesCell.swift; sourceTree = "<group>"; };
 		6DB1FA3C218C9C6C00A48F3F /* NewGamesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewGamesPresenter.swift; path = Presenters/NewGamesPresenter.swift; sourceTree = "<group>"; };
 		6DB1FA3F218C9D4400A48F3F /* NewGamesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewGamesService.swift; path = Services/NewGamesService.swift; sourceTree = "<group>"; };
+		6DB1FA42218D09A800A48F3F /* AppPresenterBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppPresenterBase.swift; path = Presenters/AppPresenterBase.swift; sourceTree = "<group>"; };
 		6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodayAppsPresenter.swift; path = Presenters/TodayAppsPresenter.swift; sourceTree = "<group>"; };
 		6DC936B121864F1400B6001C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +211,7 @@
 			children = (
 				6DC936AD218275C500B6001C /* TodayAppsPresenter.swift */,
 				6DB1FA3C218C9C6C00A48F3F /* NewGamesPresenter.swift */,
+				6DB1FA42218D09A800A48F3F /* AppPresenterBase.swift */,
 			);
 			name = Presenters;
 			sourceTree = "<group>";
@@ -330,6 +334,7 @@
 				6D4A3E332181BB4C004671B2 /* AppOfTheDayCell.swift in Sources */,
 				6D2EAE8C21865F0F0051D072 /* AppTweakRequester.swift in Sources */,
 				6D4A3E382182645E004671B2 /* AppDetails.swift in Sources */,
+				6DB1FA43218D09A800A48F3F /* AppPresenterBase.swift in Sources */,
 				6DC936B221864F1400B6001C /* Utils.swift in Sources */,
 				6D2EAEA12188A35A0051D072 /* AppDetailsViewController.swift in Sources */,
 			);
@@ -348,6 +353,7 @@
 				6DB1FA3E218C9C6C00A48F3F /* NewGamesPresenter.swift in Sources */,
 				6D3273FA21807832003EAEAD /* AppStoreTests.swift in Sources */,
 				6DB1FA3B218C9B5800A48F3F /* NewGamesCell.swift in Sources */,
+				6DB1FA44218D09A800A48F3F /* AppPresenterBase.swift in Sources */,
 				6D2EAEA22188A35A0051D072 /* AppDetailsViewController.swift in Sources */,
 				6D2EAEB421891C0E0051D072 /* AppDetailBar.swift in Sources */,
 				6DC936B321864F1400B6001C /* Utils.swift in Sources */,

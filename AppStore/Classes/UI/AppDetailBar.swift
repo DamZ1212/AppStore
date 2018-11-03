@@ -22,7 +22,7 @@ class AppDetailBar: UIView {
     @IBOutlet var contentView: UIView!
     
     var delegate : AppDetailBarDelegate?
-    var model : TodayAppViewData?
+    var model : AppDetailViewData?
     /*
     // Only override draw() if you perform custom dra?wing.
     // An empty implementation adversely affects performance during animation.
@@ -46,7 +46,7 @@ class AppDetailBar: UIView {
         Bundle.main.loadNibNamed("AppDetailBar", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth]
+//        contentView.autoresizingMask = [.flexibleWidth]
         
         // Configuring the get button
         self.getButton.layer.cornerRadius = self.getButton.frame.size.height * 0.5
@@ -74,7 +74,7 @@ class AppDetailBar: UIView {
         }
     }
     
-    func configure(model : TodayAppViewData)
+    func configure(model : AppDetailViewData)
     {
         self.model = model
         

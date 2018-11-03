@@ -10,13 +10,9 @@ import Foundation
 
 struct TodayAppViewData
 {
-    let icon : String?
-    let title : String?
-    let description : String?
+    let details : AppDetailViewData?
     let cellTitle : String?
     let screenshots : [AppDetails.Screenshot]?
-    let price : String?
-    let appStoreURL : String?
 }
 
 protocol TodayAppsView : NSObjectProtocol
@@ -27,7 +23,7 @@ protocol TodayAppsView : NSObjectProtocol
     func setGameOfTheDay(_ app: TodayAppViewData)
 }
 
-class TodayAppsPresenter
+class TodayAppsPresenter : AppPresenterBase
 {
     fileprivate let todayAppsService : TodayAppsService
     fileprivate let appService : AppService
@@ -55,15 +51,8 @@ class TodayAppsPresenter
                 if let app_id = game.application_id
                 {
                     self?.appService.getAppData(app_id: app_id, { (app : AppDetails) in
-                        if let icon = app.storeInfo?.icon, let title = app.storeInfo?.title, let description = app.storeInfo?.description
+                        if let mappedGame = self!._createTodayAppViewData(app: app, cellTitle: "Game Of The Day")
                         {
-                            var appStoreURL : String?
-                            if let locale = Locale.current.regionCode, let slug = app.storeInfo?.slug, let app_id = app.application_id
-                            {
-                                appStoreURL = getAppStoreAppURL(country: locale, name: slug, id: String(app_id))
-                            }
-                            let screenshots = app.getAvailableScreenshotsByType(device: getDeviceModelType())
-                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "Game Of The Day", screenshots: screenshots, price: app.storeInfo?.price, appStoreURL: appStoreURL)
                             self?.todayAppsView?.setGameOfTheDay(mappedGame)
                         }
                     })
@@ -75,20 +64,24 @@ class TodayAppsPresenter
                 if let app_id = app.application_id
                 {
                     self?.appService.getAppData(app_id: app_id, { (app : AppDetails) in
-                        if let icon = app.storeInfo?.icon, let title = app.storeInfo?.title, let description = app.storeInfo?.description
+                        if let mappedGame = self!._createTodayAppViewData(app: app, cellTitle: "App Of The Day")
                         {
-                            var appStoreURL : String?
-                            if let locale = Locale.current.regionCode, let slug = app.storeInfo?.slug, let app_id = app.application_id
-                            {
-                                appStoreURL = getAppStoreAppURL(country: locale, name: slug, id: String(app_id))
-                            }
-                            let screenshots = app.getAvailableScreenshotsByType(device: getDeviceModelType())
-                            let mappedGame = TodayAppViewData(icon: icon, title: title, description: description, cellTitle: "App Of The Day", screenshots: screenshots, price: app.storeInfo?.price, appStoreURL: appStoreURL)
                             self?.todayAppsView?.setAppOfTheDay(mappedGame)
                         }
                     })
                 }
             }
         }
+    }
+    
+    private func _createTodayAppViewData(app : AppDetails, cellTitle : String) -> TodayAppViewData?
+    {
+        var appViewData : TodayAppViewData?
+        if let appDetailViewData = _createAppDetailViewData(app: app)
+        {
+            let screenshots = app.getAvailableScreenshotsByType(device: getDeviceModelType())
+            appViewData = TodayAppViewData(details: appDetailViewData, cellTitle: cellTitle, screenshots: screenshots)
+        }
+        return appViewData
     }
 }

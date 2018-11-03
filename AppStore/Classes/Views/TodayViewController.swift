@@ -8,12 +8,10 @@
 
 import UIKit
 
-struct staticVariable {
-    static let AppOfTheDayCellIdentifier = "AppOfTheDay"
-    static let ShowAppDetailSegue = "ShowAppDetail"
-}
-
 class TodayViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    private let kAppOfTheDayCellIdentifier = "AppOfTheDay"
+    private let kShowAppDetailSegue = "ShowAppDetail"
     
     @IBOutlet weak var appsTableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -39,15 +37,11 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    var pageTitleName : String = ""
     var sections : [SectionType:Section]
     
     required init?(coder aDecoder: NSCoder) {
         sections =  [SectionType:Section]()
         super.init(coder: aDecoder)
-        
-        // Setup this bage page view title
-        pageTitleName = "today"
         
         sections[SectionType.AppOfTheDay] = Section(title: "App of the day")
         sections[SectionType.GameOfTheDay] = Section(title: "Game of the day")
@@ -56,11 +50,8 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Page title name
-        if !pageTitleName.isEmpty
-        {
-            pageTitle.text = String(pageTitleName.prefix(1)).uppercased() + pageTitleName.suffix(pageTitleName.count - 1)
-        }
+        let title = "today"
+        pageTitle.text = String(title.prefix(1)).uppercased() + title.suffix(title.count - 1)
         
         // Show date on top of the view
         let date = Date()
@@ -85,7 +76,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // TableView datasource and delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: staticVariable.AppOfTheDayCellIdentifier, for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: kAppOfTheDayCellIdentifier, for: indexPath)
         if let cellData = sections[SectionType(rawValue: indexPath.section)!]?.appsData[indexPath.row], let tableCell = cell as? AppOfTheDayCell
         {
             tableCell.configure(model: cellData)
@@ -127,7 +118,7 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? "")
         {
-            case staticVariable.ShowAppDetailSegue:
+            case kShowAppDetailSegue:
                 guard let appDetailsViewController = segue.destination as? AppDetailsViewController else {
                     fatalError("Unexpected destination: \(segue.destination)")
                 }

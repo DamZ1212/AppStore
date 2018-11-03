@@ -18,7 +18,7 @@ class AppDetailsViewController: UIViewController {
     @IBOutlet weak var screenshotView: UIScrollView!
     
     var app : TodayAppViewData?
-    var blur : UIVisualEffectView?
+    private var blur : UIVisualEffectView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,10 @@ class AppDetailsViewController: UIViewController {
             blur!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             backgroundImage.addSubview(blur!)
             
-            appDetailsBar.configure(model: app)
+            if let details = app.details
+            {
+                appDetailsBar.configure(model: details)
+            }
             
             let stackView = UIStackView()
             stackView.translatesAutoresizingMaskIntoConstraints = false

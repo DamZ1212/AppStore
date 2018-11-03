@@ -48,7 +48,7 @@ class AppService
                     let appDetails = AppDetails()
                     appDetails.populate(content)
                     self.apps[id] = appDetails
-                    DispatchQueue.main.async {callback(appDetails)}
+                    callback(appDetails)
                 }
             }
 //            })
