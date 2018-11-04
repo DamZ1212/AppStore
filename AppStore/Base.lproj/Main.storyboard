@@ -10,6 +10,56 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Search-->
+        <scene sceneID="kIY-NO-pRM">
+            <objects>
+                <viewController id="VQ6-tx-roe" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e2r-jz-5SY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqN-Fb-vva">
+                                <rect key="frame" x="135" y="295" width="163" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="deO-F3-KSW"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" id="ooX-Tp-lYe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FaH-is-KSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1530" y="658"/>
+        </scene>
+        <!--Updates-->
+        <scene sceneID="tae-GH-DDX">
+            <objects>
+                <viewController id="tu2-4P-hQV" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JpZ-n8-fLf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Updates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWJ-Mq-23g">
+                                <rect key="frame" x="119" y="293" width="196" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8gA-Ad-uwg"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Updates" image="updates" id="o9l-Zp-HeL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iHH-EZ-2iK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-823" y="658"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -22,11 +72,39 @@
                     <connections>
                         <segue destination="g5l-Na-V4u" kind="relationship" relationship="viewControllers" id="dxN-mi-Cfu"/>
                         <segue destination="Iyx-j7-qLw" kind="relationship" relationship="viewControllers" id="JTI-V2-QCn"/>
+                        <segue destination="tdY-V4-e2l" kind="relationship" relationship="viewControllers" id="J53-0j-Gow"/>
+                        <segue destination="tu2-4P-hQV" kind="relationship" relationship="viewControllers" id="r7k-dK-T3i"/>
+                        <segue destination="VQ6-tx-roe" kind="relationship" relationship="viewControllers" id="upj-FG-3yn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-33" y="-84"/>
+        </scene>
+        <!--Apps-->
+        <scene sceneID="5uR-uc-VCb">
+            <objects>
+                <viewController id="tdY-V4-e2l" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gst-y6-urw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Apps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2z-Zi-h0i">
+                                <rect key="frame" x="126" y="294" width="121" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qul-qa-dhP"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Apps" image="apps" id="hFd-Pf-0lQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9fG-2O-0s3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-64" y="658"/>
         </scene>
         <!--Games-->
         <scene sceneID="ut1-IC-qHd">
@@ -146,7 +224,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tdv-aW-V5N"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Games" image="apps" id="y0m-Pw-pOO"/>
+                    <tabBarItem key="tabBarItem" title="Games" image="games" id="y0m-Pw-pOO"/>
                     <connections>
                         <outlet property="pageTitle" destination="Wrl-zt-xdr" id="Cof-k6-woA"/>
                         <outlet property="tableView" destination="OP6-lX-Oih" id="NgH-py-U1Q"/>
@@ -420,6 +498,9 @@
     <resources>
         <image name="apps" width="37.5" height="37.5"/>
         <image name="close" width="256" height="256"/>
+        <image name="games" width="37.5" height="37.5"/>
+        <image name="search" width="37.5" height="37.5"/>
         <image name="today" width="37.5" height="37.5"/>
+        <image name="updates" width="37.5" height="37.5"/>
     </resources>
 </document>
