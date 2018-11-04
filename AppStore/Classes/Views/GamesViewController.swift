@@ -64,7 +64,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 300
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -72,7 +72,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
 }

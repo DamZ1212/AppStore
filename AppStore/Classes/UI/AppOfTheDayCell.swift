@@ -75,6 +75,7 @@ class AppOfTheDayCell: UITableViewCell {
         if let details = model.details
         {
             appDetailBar.configure(model: details)
+            appDetailBar.setDisplayMode(mode: AppDetailBar.DisplayMode.kDark)
         }
         else
         {

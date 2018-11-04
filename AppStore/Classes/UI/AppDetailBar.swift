@@ -20,6 +20,12 @@ class AppDetailBar: UIView {
     @IBOutlet weak var appDesc: UILabel!
     @IBOutlet weak var getButton: UIButton!
     @IBOutlet var contentView: UIView!
+
+    enum DisplayMode
+    {
+        case kLight
+        case kDark
+    }
     
     var delegate : AppDetailBarDelegate?
     var model : AppDetailViewData?
@@ -98,5 +104,18 @@ class AppDetailBar: UIView {
         }
         
     }
-
+    
+    func setDisplayMode(mode : DisplayMode)
+    {
+        switch mode {
+            case .kLight:
+                self.appTitle.textColor = UIColor.black
+                self.appDesc.textColor = UIColor.gray
+                self.getButton.backgroundColor = UIColor.lightGray
+            case .kDark:
+                self.appTitle.textColor = UIColor.white
+                self.appDesc.textColor = UIColor.lightGray
+                self.getButton.backgroundColor = UIColor.white
+            }
+    }
 }

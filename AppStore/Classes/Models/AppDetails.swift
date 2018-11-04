@@ -10,13 +10,6 @@ import Foundation
 
 class AppDetails
 {
-    enum PriceType : String
-    {
-        case free = "free"
-        case paid = "paid"
-        case grossing = "grossing"
-    }
-    
     struct Rank
     {
         var category_id : String?
@@ -103,16 +96,6 @@ class AppDetails
             var version : String?
             var release_date : String?
             var release_note : String?
-        }
-        
-        enum Device : String, CaseIterable
-        {
-            case ipad           = "ipad"
-            case ipod           = "ipod"
-            case iphone         = "iphone"
-            case iphone5        = "iphone5"
-            case iphone6        = "iphone6"
-            case iphone6plus    = "iphone6plus"
         }
         
         enum Feature : String
@@ -311,7 +294,7 @@ class AppDetails
     func getAvailableScreenshotsByType(device: String) -> [Screenshot]?
     {
         var screenshots : [Screenshot]? = nil
-        AppDetails.StoreInfo.Device.allCases.forEach{ aDevice in
+        Device.allCases.forEach{ aDevice in
             if aDevice.rawValue.contains(device), let empty = storeInfo?.screenshots?[aDevice]?.isEmpty, !empty
             {
                 screenshots = storeInfo!.screenshots![aDevice]!

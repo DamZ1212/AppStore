@@ -55,6 +55,11 @@ class AppDetailsViewController: UIViewController {
             if let details = app.details
             {
                 appDetailsBar.configure(model: details)
+                appDetailsBar.setDisplayMode(mode: AppDetailBar.DisplayMode.kDark)
+            }
+            else
+            {
+                appDetailsBar.isHidden = true
             }
             
             let stackView = UIStackView()

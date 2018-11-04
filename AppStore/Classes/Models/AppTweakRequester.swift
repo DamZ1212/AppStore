@@ -72,9 +72,9 @@ class TopAppsRequest : AppTweakRequest, Request
 {
     var category : Int = Category.all.rawValue
     var amount : Int
-    var type : String = "free"
+    var type : PriceType = .free
     
-    init(category : Int, amount : Int = 10) {
+    init(category : Int, amount : Int = 10, type : PriceType = .free) {
         self.category = category
         self.amount = amount
     }
@@ -82,7 +82,7 @@ class TopAppsRequest : AppTweakRequest, Request
     func getURL() -> URL?
     {
         var url = AppTweakRequester.baseURL
-        url += "categories/\(self.category)/top.json?country=\(self.country)&langage=\(self.langage)&device=\(self.device)&type=\(self.type)&num=\(amount)"
+        url += "categories/\(self.category)/top.json?country=\(self.country)&langage=\(self.langage)&device=\(self.device)&type=\(self.type)&num=\(amount)&=type=\(type.rawValue)"
         return URL(string: url)
     }
 }

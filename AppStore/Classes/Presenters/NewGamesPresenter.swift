@@ -36,25 +36,42 @@ class NewGamesPresenter : AppPresenterBase
         newGamesView = nil
     }
     
-    func getNewGames(){
+    func getNewGames(quantity : Int = 12){
         self.newGamesView?.startLoading()
-        newGamesService.getNewGames(amount: 10) { (games: [AppInfo]?) in
+        newGamesService.getNewGames(amount: 100) { (games: [AppInfo]?) in
             if let games = games
             {
-                var gameDetails = [AppDetailViewData]()
+                var gameDetails = [AppDetails]()
+                var gameViewDatas = [AppDetailViewData]()
                 for game in games
                 {
                     if let game_id = game.application_id
                     {
                         self.appService.getAppData(app_id: game_id, { (app : AppDetails) in
-                            if let mappedGame = self._createAppDetailViewData(app: app)
+                            gameDetails.append(app)
+                            if gameDetails.count == quantity
                             {
-                                gameDetails.append(mappedGame)
-                            }
-                            if gameDetails.count == games.count
-                            {
-                                self.newGamesView?.setGames(gameDetails)
-                                self.newGamesView?.finishLoading()
+                                gameDetails.sort(by: { (app1: AppDetails, app2: AppDetails) -> Bool in
+                                    if let app1date = app1.storeInfo?.release_date, let app2date = app2.storeInfo?.release_date
+                                    {
+                                        let formatter : DateFormatter = DateFormatter()
+                                        if let date1 = formatter.date(from: app1date), let date2 = formatter.date(from: app2date)
+                                        {
+                                            return date1 > date2
+                                        }
+                                    }
+                                    return false
+                                })
+                                
+                                for gameDetail in gameDetails
+                                {
+                                    if let mappedGame = self._createAppDetailViewData(app: gameDetail)
+                                    {
+                                        gameViewDatas.append(mappedGame)
+                                    }
+                                    self.newGamesView?.setGames(gameViewDatas)
+                                    self.newGamesView?.finishLoading()
+                                }
                             }
                         })
                     }
