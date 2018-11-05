@@ -41,13 +41,20 @@ class AppService
 //                    return
 //                }
 //                print(String(data: data, encoding: .utf8))
-            let appDetails : AppDetails? = parseAppData(data: data)
-            callback(appDetails!)
+            do
+            {
+                let appDetails : AppDetails? = try parseAppData(data: data)
+                callback(appDetails!)
+            }
+            catch
+            {
+                print(error)
+            }
 //            })
         }
     }
     
-    func parseAppData(data : Data) -> AppDetails?
+    func parseAppData(data : Data) throws -> AppDetails?
     {
         do
         {
@@ -63,7 +70,7 @@ class AppService
         }
         catch
         {
-            print(error)
+            throw(error)
         }
         return nil
     }

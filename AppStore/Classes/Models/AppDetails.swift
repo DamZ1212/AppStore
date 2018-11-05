@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ App Details format received from AppTweak
+ **/
 class AppDetails
 {
     struct Rank
@@ -233,6 +236,7 @@ class AppDetails
     init() {
     }
     
+    // Populate from json parsed data
     func populate(_ json: [String:Any])
     {
         if let application_id = json["application_id"] as? Int
@@ -280,6 +284,7 @@ class AppDetails
         }
     }
     
+    // Returns first avalaible screenshot from datas
     func getFirstAvailableScreenShot() -> Screenshot?
     {
         if let info = self.storeInfo, let screenshots = info.screenshots
@@ -295,6 +300,8 @@ class AppDetails
         return nil
     }
     
+    // Return all available screenshots by device type
+    // If iphone, will return most defined one in priority
     func getAvailableScreenshotsByType(device: String) -> [Screenshot]?
     {
         var screenshots : [Screenshot]? = nil

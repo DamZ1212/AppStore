@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Base App Info parsed data fro; AppTweak
+ */
 class AppInfo
 {
     var application_id : Int?
@@ -22,6 +25,7 @@ class AppInfo
     init() {
     }
     
+    // Populate data from json
     func populateFromJSON(_ json: [String:Any])
     {
         if let slug = json["slug"] as? String

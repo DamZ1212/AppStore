@@ -23,6 +23,7 @@ class AppDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Parsing App Info
         if let app = self.app
         {
             if let cellTitle = app.cellTitle
@@ -95,7 +96,6 @@ class AppDetailsViewController: UIViewController {
                 }
             }
             
-            //scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: appDescription.frame.origin.y)
             scrollview.bottomAnchor.constraint(equalTo: screenshotView.bottomAnchor).isActive = true
         }
     }
@@ -108,16 +108,6 @@ class AppDetailsViewController: UIViewController {
     {
         self.app = app
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func createLoremIpsum() -> String
     {

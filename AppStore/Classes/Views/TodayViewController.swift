@@ -10,32 +10,42 @@ import UIKit
 
 class TodayViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // Identifiers
     private let kAppOfTheDayCellIdentifier = "AppOfTheDay"
     private let kShowAppDetailSegue = "ShowAppDetail"
+    private let kTableViewBaseCellHeight = 300
     
-    @IBOutlet weak var appsTableView: UITableView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var pageTitle: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    fileprivate let appPresenter = TodayAppsPresenter(todayAppsService: TodayAppsService(), appService: AppService())
-    fileprivate var gameOfTheDay : TodayAppViewData?
-    fileprivate var appOfTheDay : TodayAppViewData?
-    
+    // table View sections
     enum SectionType : Int{
         case AppOfTheDay = 0
         case GameOfTheDay
     }
     
+    // Section infos
     struct Section
     {
         var appsData : [TodayAppViewData] = [TodayAppViewData]()
         var title : String = ""
+        var cellHeight : Int
         
-        init(title : String) {
+        init(title : String, cellHeight : Int) {
             self.title = title
+            self.cellHeight = cellHeight
         }
     }
+    
+    // Outlets
+    @IBOutlet weak var appsTableView: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var pageTitle: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    // Presenters
+    fileprivate let appPresenter = TodayAppsPresenter(todayAppsService: TodayAppsService(), appService: AppService())
+    
+    // Stored infos
+    fileprivate var gameOfTheDay : TodayAppViewData?
+    fileprivate var appOfTheDay : TodayAppViewData?
     
     var sections : [SectionType:Section]
     
@@ -43,8 +53,9 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
         sections =  [SectionType:Section]()
         super.init(coder: aDecoder)
         
-        sections[SectionType.AppOfTheDay] = Section(title: "App of the day")
-        sections[SectionType.GameOfTheDay] = Section(title: "Game of the day")
+        // Declaring sections
+        sections[SectionType.AppOfTheDay] = Section(title: "App of the day", cellHeight: kTableViewBaseCellHeight)
+        sections[SectionType.GameOfTheDay] = Section(title: "Game of the day", cellHeight: kTableViewBaseCellHeight)
     }
     
     override func viewDidLoad() {
@@ -97,8 +108,11 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // parameter ?
-        return 300
+        if let sec = SectionType(rawValue: indexPath.section)
+        {
+            return CGFloat(sections[sec]?.cellHeight!)
+        }
+        return CGFloat(kTableViewBaseCellHeight)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

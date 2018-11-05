@@ -24,12 +24,19 @@ class TodayAppsService
         let data = appsJson.data(using: String.Encoding.utf8, allowLossyConversion: false)!
 //        requester.query(req: topAppsRequest, completion: {data, response, error in
 //            print(String(data: data!, encoding: .utf8))
-            parseAppsOfTheDayData(data: data)
+            do
+            {
+                try parseAppsOfTheDayData(data: data)
+            }
+            catch
+            {
+                print(error)
+            }
             DispatchQueue.main.async {callback()}
 //        })
     }
     
-    func parseAppsOfTheDayData(data : Data)
+    func parseAppsOfTheDayData(data : Data) throws
     {
         do
         {
@@ -49,12 +56,13 @@ class TodayAppsService
         }
         catch
         {
-            print(error)
+            throw(error)
         }
     }
     
-    func getGameOfTheDay() -> AppInfo? {
-        return appsOfTheDay[694580816]
+    func getGameOfTheDay() -> AppInfo?
+    {
+//        return appsOfTheDay[694580816]
         if let result = appsOfTheDay.first(where: { pair -> Bool in
             return (pair.value.genres?.contains
             {
@@ -73,7 +81,6 @@ class TodayAppsService
     }
     
     func getAppOfTheDay() -> AppInfo? {
-        return appsOfTheDay[543186831]
         if let result = appsOfTheDay.first(where: { pair -> Bool in
             return !(pair.value.genres?.contains
             {

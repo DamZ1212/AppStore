@@ -31,22 +31,7 @@ class NewGamesService
             var games : [AppInfo]?
             do
             {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
-                {
-                    games = [AppInfo]()
-                    for gameData in json["content"] as! [Any]
-                    {
-                        guard games!.count < amount
-                        else
-                        {
-                            callback(games)
-                            return
-                        }
-                        let app = AppInfo()
-                        app.populateFromJSON(gameData as! [String : Any])
-                        games!.append(app)
-                    }
-                }
+                games = try parseNewGamesData(amount : amount, data : data)
             }
             catch
             {
@@ -54,6 +39,34 @@ class NewGamesService
             }
             callback(games)
 //        })
+    }
+    
+    func parseNewGamesData(amount : Int, data : Data) throws -> [AppInfo]?
+    {
+        do
+        {
+            var games : [AppInfo]?
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+            {
+                games = [AppInfo]()
+                for gameData in json["content"] as! [Any]
+                {
+                    guard games!.count < amount
+                        else
+                    {
+                        return games
+                    }
+                    let app = AppInfo()
+                    app.populateFromJSON(gameData as! [String : Any])
+                    games!.append(app)
+                }
+            }
+            return games
+        }
+        catch
+        {
+            throw(error)
+        }
     }
     
     

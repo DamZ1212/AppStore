@@ -31,6 +31,21 @@ class SelectionOfTheWeekService
         var apps : [AppInfo]?
         do
         {
+            apps = try parseSelectionOfAppsOfTheWeek(amount: amount, data: data)
+        }
+        catch
+        {
+            print(error)
+        }
+        callback(apps)
+        //        })
+    }
+    
+    func parseSelectionOfAppsOfTheWeek(amount : Int, data : Data) throws -> [AppInfo]?
+    {
+        do
+        {
+            var apps : [AppInfo]?
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
             {
                 apps = [AppInfo]()
@@ -39,21 +54,19 @@ class SelectionOfTheWeekService
                     guard apps!.count < amount
                         else
                     {
-                        callback(apps)
-                        return
+                        return apps
                     }
                     let app = AppInfo()
                     app.populateFromJSON(appData as! [String : Any])
                     apps!.append(app)
                 }
             }
+            return apps
         }
         catch
         {
-            print(error)
+            throw(error)
         }
-        callback(apps)
-        //        })
     }
     
     
