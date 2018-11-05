@@ -20,6 +20,7 @@ struct AppDetailViewData
 
 class AppPresenterBase
 {
+    // Creating AppDetailViewData out of AppDetail (full app info)
     internal func _createAppDetailViewData(app : AppDetails) -> AppDetailViewData?
     {
         var appViewData : AppDetailViewData?
@@ -35,6 +36,7 @@ class AppPresenterBase
         return appViewData
     }
     
+    // Creating AppDetailViewData out of AppInfo (limited app info)
     internal func _createAppInfoViewData(app: AppInfo) -> AppDetailViewData?
     {
         var appViewData : AppDetailViewData?

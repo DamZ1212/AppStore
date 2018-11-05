@@ -39,6 +39,7 @@ class NewGamesPresenter : AppPresenterBase
             if let games = games
             {
                 var gamesDic = [Int:AppInfo]()
+                // getting random games
                 while gamesDic.count < min(quantity, amount)
                 {
                     if let randomApp = games.randomElement(), let appId = randomApp.application_id
@@ -48,12 +49,14 @@ class NewGamesPresenter : AppPresenterBase
                 }
                 var returnedGames = [AppDetailViewData]()
                 
+                // creating modelviewdata
                 for (_, value) in gamesDic {
                     if let appInfoViewData = self._createAppInfoViewData(app: value)
                     {
                         returnedGames.append(appInfoViewData)
                     }
                 }
+                // shuffling to look different :)
                 returnedGames.shuffle()
                 self.newGamesView?.setGames(returnedGames)
             }

@@ -35,10 +35,11 @@ class PaidGamesPresenter : AppPresenterBase
     }
     
     func getSelectedGamesOfTheWeek(quantity : Int = 12){
-        newGamesSeletionOfTheWeekService.getSelectedAppsOfTheWeek(amount: 30, type: PriceType.paid) { (games: [AppInfo]?, amount: Int) in
+        newGamesSeletionOfTheWeekService.getSelectedAppsOfTheWeek(amount: 50, type: PriceType.paid) { (games: [AppInfo]?, amount: Int) in
             if let games = games
             {
                 var gamesDic = [Int:AppInfo]()
+                // getting random apps
                 while gamesDic.count < min(quantity, amount)
                 {
                     if let randomApp = games.randomElement(), let appId = randomApp.application_id
@@ -48,12 +49,14 @@ class PaidGamesPresenter : AppPresenterBase
                 }
                 var returnedGames = [AppDetailViewData]()
                 
+                // creating our modelviewdata
                 for (_, value) in gamesDic {
                     if let appInfoViewData = self._createAppInfoViewData(app: value)
                     {
                         returnedGames.append(appInfoViewData)
                     }
                 }
+                // shuffle to look different ;)
                 returnedGames.shuffle()
                 self.paidGameView?.setPaidGames(returnedGames)
             }
