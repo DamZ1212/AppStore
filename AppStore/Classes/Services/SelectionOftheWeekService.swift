@@ -29,21 +29,28 @@ class SelectionOfTheWeekService
         let data = testResponse.data(using: String.Encoding.utf8, allowLossyConversion: false)!
         
         var apps : [AppInfo]?
-        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+        do
         {
-            apps = [AppInfo]()
-            for appData in json!["content"] as! [Any]
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
             {
-                guard apps!.count < amount
-                    else
+                apps = [AppInfo]()
+                for appData in json["content"] as! [Any]
                 {
-                    callback(apps)
-                    return
+                    guard apps!.count < amount
+                        else
+                    {
+                        callback(apps)
+                        return
+                    }
+                    let app = AppInfo()
+                    app.populateFromJSON(appData as! [String : Any])
+                    apps!.append(app)
                 }
-                let app = AppInfo()
-                app.populateFromJSON(appData as! [String : Any])
-                apps!.append(app)
             }
+        }
+        catch
+        {
+            print(error)
         }
         callback(apps)
         //        })

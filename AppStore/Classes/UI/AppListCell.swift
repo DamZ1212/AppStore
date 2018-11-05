@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewGamesCell: UITableViewCell {
+class AppListCell: UITableViewCell {
 
     private let kAppDetailsSize : CGSize = CGSize(width: 350, height: 50)
     private let kNumAppsPercolumn : Int = 3
@@ -30,22 +30,22 @@ class NewGamesCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(games : [AppDetailViewData])
+    func configure(title : String, apps : [AppDetailViewData])
     {
-        cellTitle.text = "New games we like"
+        cellTitle.text = title
 
         var startIndex = 0
         var endIndex = 0
         repeat
         {
-            endIndex = min(startIndex + kNumAppsPercolumn, games.count)
-            _createColumn(games: Array(games[startIndex..<endIndex]), view: horizontalView)
+            endIndex = min(startIndex + kNumAppsPercolumn, apps.count)
+            _createColumn(apps: Array(apps[startIndex..<endIndex]), view: horizontalView)
             startIndex = endIndex
         }
-        while startIndex < games.count
+        while startIndex < apps.count
     }
     
-    private func _createColumn(games : [AppDetailViewData], view: UIStackView)
+    private func _createColumn(apps : [AppDetailViewData], view: UIStackView)
     {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,10 +56,10 @@ class NewGamesCell: UITableViewCell {
         view.addArrangedSubview(stackView)
         stackView.widthAnchor.constraint(equalToConstant: kAppDetailsSize.width).isActive = true
         
-        for game in games
+        for app in apps
         {
             let container : AppDetailBar = AppDetailBar()
-            container.configure(model: game)
+            container.configure(model: app)
             container.setDisplayMode(mode: AppDetailBar.DisplayMode.kLight)
             stackView.addArrangedSubview(container)
             container.heightAnchor.constraint(equalToConstant: kAppDetailsSize.height).isActive = true

@@ -52,7 +52,6 @@ class AppDetailBar: UIView {
         Bundle.main.loadNibNamed("AppDetailBar", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
-//        contentView.autoresizingMask = [.flexibleWidth]
         
         // Configuring the get button
         self.getButton.layer.cornerRadius = self.getButton.frame.size.height * 0.5

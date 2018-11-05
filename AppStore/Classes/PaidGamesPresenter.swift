@@ -10,9 +10,7 @@ import Foundation
 
 protocol PaidGamesView : NSObjectProtocol
 {
-    func startLoading()
-    func finishLoading()
-    func setGames(_ app: [AppDetailViewData])
+    func setPaidGames(_ app: [AppDetailViewData])
 }
 
 class PaidGamesPresenter : AppPresenterBase
@@ -37,23 +35,33 @@ class PaidGamesPresenter : AppPresenterBase
     }
     
     func getSelectedGamesOfTheWeek(quantity : Int = 12){
-        self.paidGameView?.startLoading()
-        newGamesSeletionOfTheWeekService.getSelectedAppsOfTheWeek(amount: 100, type: PriceType.paid) { (games: [AppInfo]?) in
+        newGamesSeletionOfTheWeekService.getSelectedAppsOfTheWeek(amount: 50, type: PriceType.paid) { (games: [AppInfo]?) in
             if let games = games
             {
                 var gameDetails = [AppDetails]()
                 var gameViewDatas = [AppDetailViewData]()
                 let formatter : DateFormatter = DateFormatter()
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.dateFormat = "yyyy-MM-dd hh:mm:ss zzz"
+                formatter.isLenient = true
                 let today = Date()
-                let lastWeek = Calendar.current.date(byAdding: .month, value: -7, to: today)
+                let lastWeek = Calendar.current.date(byAdding: .day, value: -7, to: today)
                 var index = 0
                 for game in games
                 {
                     if let game_id = game.application_id
                     {
-                        self.appService.getAppData(app_id: game_id, { (app : AppDetails) in
+                        self.appService.getAppData(appId: game_id, { (app : AppDetails) in
                             
-                            if let appReleaseDate = app.storeInfo?.release_date, let date = formatter.date(from: appReleaseDate), let lastWeek = lastWeek, lastWeek < date
+                            guard gameDetails.count < quantity else
+                            {
+                                return
+                            }
+                            
+                            let appReleaseDate = app.storeInfo?.release_date
+                            let date = formatter.date(from: appReleaseDate!)
+                            
+                            if let lastWeek = lastWeek, lastWeek < date!
                             {
                                 gameDetails.append(app)
                                 
@@ -73,9 +81,9 @@ class PaidGamesPresenter : AppPresenterBase
                                         {
                                             gameViewDatas.append(mappedGame)
                                         }
-                                        self.paidGameView?.setGames(gameViewDatas)
-                                        self.paidGameView?.finishLoading()
                                     }
+                                    self.paidGameView?.setPaidGames(gameViewDatas)
+                                    return
                                 }
                             }
                         })

@@ -10,8 +10,6 @@ import Foundation
 
 protocol NewGamesView : NSObjectProtocol
 {
-    func startLoading()
-    func finishLoading()
     func setGames(_ app: [AppDetailViewData])
 }
 
@@ -37,7 +35,6 @@ class NewGamesPresenter : AppPresenterBase
     }
     
     func getNewGames(quantity : Int = 12){
-        self.newGamesView?.startLoading()
         newGamesService.getNewGames(amount: 100) { (games: [AppInfo]?) in
             if let games = games
             {
@@ -47,7 +44,7 @@ class NewGamesPresenter : AppPresenterBase
                 {
                     if let game_id = game.application_id
                     {
-                        self.appService.getAppData(app_id: game_id, { (app : AppDetails) in
+                        self.appService.getAppData(appId: game_id, { (app : AppDetails) in
                             gameDetails.append(app)
                             if gameDetails.count == quantity
                             {
@@ -70,7 +67,6 @@ class NewGamesPresenter : AppPresenterBase
                                         gameViewDatas.append(mappedGame)
                                     }
                                     self.newGamesView?.setGames(gameViewDatas)
-                                    self.newGamesView?.finishLoading()
                                 }
                             }
                         })

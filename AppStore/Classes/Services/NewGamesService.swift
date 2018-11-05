@@ -29,21 +29,28 @@ class NewGamesService
             let data = testResponse.data(using: String.Encoding.utf8, allowLossyConversion: false)!
         
             var games : [AppInfo]?
-            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+            do
             {
-                games = [AppInfo]()
-                for gameData in json!["content"] as! [Any]
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
                 {
-                    guard games!.count < amount
-                    else
+                    games = [AppInfo]()
+                    for gameData in json["content"] as! [Any]
                     {
-                        callback(games)
-                        return
+                        guard games!.count < amount
+                        else
+                        {
+                            callback(games)
+                            return
+                        }
+                        let app = AppInfo()
+                        app.populateFromJSON(gameData as! [String : Any])
+                        games!.append(app)
                     }
-                    let app = AppInfo()
-                    app.populateFromJSON(gameData as! [String : Any])
-                    games!.append(app)
                 }
+            }
+            catch
+            {
+                print(error)
             }
             callback(games)
 //        })

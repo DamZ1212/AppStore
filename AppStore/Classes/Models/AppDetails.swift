@@ -162,6 +162,10 @@ class AppDetails
                     }
                 }
             }
+            if let release_date = json["release_date"] as? String
+            {
+                self.release_date = release_date
+            }
             if let price = json["price"] as? String
             {
                 self.price = price

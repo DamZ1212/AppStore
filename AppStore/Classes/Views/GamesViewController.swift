@@ -10,14 +10,38 @@ import UIKit
 
 class GamesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    private let kNewGamesCellIdentifier = "NewGames"
+    private let kAppListIdentifier = "AppList"
     
     @IBOutlet weak var pageTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    private var newGames : [AppDetailViewData]?
+    fileprivate let newGamesPresenter = NewGamesPresenter(newGamesService: NewGamesService(), appService: AppService())
+    fileprivate let paidNewGamesPresenter = PaidGamesPresenter(newGamesSeletionOfTheWeekService: SelectionOfTheWeekService(), appService: AppService())
     
-    fileprivate let gamesPresenter = NewGamesPresenter(newGamesService: NewGamesService(), appService: AppService())
+    enum SectionType : Int{
+        case GamesWeLike = 0
+        case PaidAppsOfTheWeek
+    }
+    
+    struct Section
+    {
+        var appsData : [AppDetailViewData] = [AppDetailViewData]()
+        var cellTitle : String = ""
+        
+        init(title : String) {
+            self.cellTitle = title
+        }
+    }
+    
+    var sections : [SectionType:Section]
+    
+    required init?(coder aDecoder: NSCoder) {
+        sections =  [SectionType:Section]()
+        super.init(coder: aDecoder)
+        
+        sections[SectionType.GamesWeLike] = Section(title: "Games we like to play")
+        sections[SectionType.PaidAppsOfTheWeek] = Section(title: "Paid games of the week")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,27 +53,19 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.dataSource = self
         
         // Attach itself to the presenter for it to handle datas
-        gamesPresenter.attachView(self)
-        gamesPresenter.getNewGames()
-        // Do any additional setup after loading the view.
+        newGamesPresenter.attachView(self)
+        newGamesPresenter.getNewGames()
+        
+        paidNewGamesPresenter.attachView(self)
+        paidNewGamesPresenter.getSelectedGamesOfTheWeek()
+        
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: kNewGamesCellIdentifier, for: indexPath)
-        if let tableCell = cell as? NewGamesCell, let newGames = newGames
+        var cell = tableView.dequeueReusableCell(withIdentifier: kAppListIdentifier, for: indexPath)
+        if let section = sections[SectionType(rawValue: indexPath.section)!], let tableCell = cell as? AppListCell
         {
-            tableCell.configure(games: newGames)
+            tableCell.configure(title: section.cellTitle, apps: section.appsData)
         }
         else
         {
@@ -64,7 +80,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return 270
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -72,7 +88,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sections.count
     }
 
 }
@@ -80,22 +96,17 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
 extension GamesViewController: NewGamesView {
     
     func setGames(_ games: [AppDetailViewData]) {
-        self.newGames = games
-//        sections[SectionType.GameOfTheDay]?.appsData.append(app)
-//        appsTableView?.isHidden = false
+        sections[SectionType.GamesWeLike]?.appsData.append(contentsOf: games)
         tableView?.reloadData()
     }
     
+}
+
+extension GamesViewController: PaidGamesView {
     
-    func startLoading() {
-//        activityIndicator?.isHidden = false
-//        activityIndicator?.startAnimating()
+    func setPaidGames(_ games: [AppDetailViewData]) {
+        sections[SectionType.PaidAppsOfTheWeek]?.appsData.append(contentsOf: games)
+        tableView?.reloadData()
     }
-    
-    func finishLoading() {
-//        activityIndicator?.isHidden = true
-//        activityIndicator?.stopAnimating()
-    }
-    
 }
 

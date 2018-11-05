@@ -17,8 +17,6 @@ struct TodayAppViewData
 
 protocol TodayAppsView : NSObjectProtocol
 {
-    func startLoading()
-    func finishLoading()
     func setAppOfTheDay(_ app: TodayAppViewData)
     func setGameOfTheDay(_ app: TodayAppViewData)
 }
@@ -43,14 +41,12 @@ class TodayAppsPresenter : AppPresenterBase
     }
     
     func getAppsOfTheDay(){
-        self.todayAppsView?.startLoading()
         todayAppsService.getAppsOfTheDay{ [weak self] in
-            self?.todayAppsView?.finishLoading()
             if let game = self?.todayAppsService.getGameOfTheDay()
             {
                 if let app_id = game.application_id
                 {
-                    self?.appService.getAppData(app_id: app_id, { (app : AppDetails) in
+                    self?.appService.getAppData(appId: app_id, { (app : AppDetails) in
                         if let mappedGame = self!._createTodayAppViewData(app: app, cellTitle: "Game Of The Day")
                         {
                             self?.todayAppsView?.setGameOfTheDay(mappedGame)
@@ -63,7 +59,7 @@ class TodayAppsPresenter : AppPresenterBase
             {
                 if let app_id = app.application_id
                 {
-                    self?.appService.getAppData(app_id: app_id, { (app : AppDetails) in
+                    self?.appService.getAppData(appId: app_id, { (app : AppDetails) in
                         if let mappedGame = self!._createTodayAppViewData(app: app, cellTitle: "App Of The Day")
                         {
                             self?.todayAppsView?.setAppOfTheDay(mappedGame)
