@@ -96,8 +96,11 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
 extension GamesViewController: NewGamesView {
     
     func setGames(_ games: [AppDetailViewData]) {
-        sections[SectionType.GamesWeLike]?.appsData.append(contentsOf: games)
-        tableView?.reloadData()
+        if (games.count > 0)
+        {
+            sections[SectionType.GamesWeLike]?.appsData.append(contentsOf: games)
+            tableView?.reloadData()
+        }
     }
     
 }
@@ -105,8 +108,11 @@ extension GamesViewController: NewGamesView {
 extension GamesViewController: PaidGamesView {
     
     func setPaidGames(_ games: [AppDetailViewData]) {
-        sections[SectionType.PaidAppsOfTheWeek]?.appsData.append(contentsOf: games)
-        tableView?.reloadData()
+        if (games.count > 0)
+        {
+            sections[SectionType.PaidAppsOfTheWeek]?.appsData.append(contentsOf: games)
+            tableView?.reloadData()
+        }
     }
 }
 

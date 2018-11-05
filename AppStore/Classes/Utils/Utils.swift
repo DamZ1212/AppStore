@@ -14,6 +14,7 @@ func getDataFromURL(from url: URL, completion: @escaping (Data?, URLResponse?, E
     URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
 }
 
+// Getting an image from the internetz, callbacking when done
 func getImage(from url: URL, callback: @escaping ((UIImage?) -> Void) = { image in return }) {
     getDataFromURL(from: url) { data, response, error in
         guard let data = data, error == nil else { return }
@@ -23,12 +24,14 @@ func getImage(from url: URL, callback: @escaping ((UIImage?) -> Void) = { image 
     }
 }
 
+// Get current device type
 func getDeviceModelType() -> String
 {
     let model = UIDevice.current.model
     return model.lowercased()
 }
 
+// Compose an app store url for the app
 func getAppStoreAppURL(country : String, name : String, id : String) -> String
 {
     return String("http://itunes.apple.com/\(country.lowercased())/app/\(name)/id\(id)?mt=8")

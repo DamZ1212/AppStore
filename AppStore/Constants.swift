@@ -11,7 +11,7 @@ import Foundation
 struct GlobalConstants {
     struct AppTweak
     {
-        static let SecretKey : String = "WiZjajvanUYJu2Gk6g79piE41Y4"
+        static let SecretKey : String = "V9vt_voZ0V-vSIQoHgvGc1Q1M_I"
         static var BaseURL : String = "https://api.apptweak.com/ios/"
         static var HeaderKey : String = "X-Apptweak-Key"
     }

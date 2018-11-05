@@ -20,25 +20,28 @@ class AppTweakRequest
     var device : String = "iphone"
 }
 
+// Get top apps by parameters
 class TopAppsRequest : AppTweakRequest, Request
 {
     var category : Int = Category.all.rawValue
     var amount : Int
-    var type : PriceType = .free
+    var priceType : PriceType = .free
     
-    init(category : Int, amount : Int = 10, type : PriceType = .free) {
+    init(category : Int, amount : Int = 10, priceType : PriceType = .free) {
         self.category = category
         self.amount = amount
+        self.priceType = priceType
     }
     
     func getURL() -> URL?
     {
         var url = GlobalConstants.AppTweak.BaseURL
-        url += "categories/\(self.category)/top.json?country=\(self.country)&langage=\(self.langage)&device=\(self.device)&type=\(self.type)&num=\(amount)&=type=\(type.rawValue)"
+        url += "categories/\(self.category)/top.json?country=\(self.country)&langage=\(self.langage)&device=\(self.device)&type=\(self.priceType.rawValue)&num=\(amount)"
         return URL(string: url)
     }
 }
 
+// Get targeted app data
 class AppDataRequest : AppTweakRequest, Request
 {
     var id : Int = 0
@@ -55,6 +58,7 @@ class AppDataRequest : AppTweakRequest, Request
     }
 }
 
+// Get apps by search term
 class SearchAppsRequest : AppTweakRequest, Request
 {
     var term : String = ""
@@ -71,6 +75,7 @@ class SearchAppsRequest : AppTweakRequest, Request
     }
 }
 
+// Basic requester
 class AppTweakRequester
 {
     func query(req: Request, completion: @escaping (Data?, URLResponse?, Error?) -> ())

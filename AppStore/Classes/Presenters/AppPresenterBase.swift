@@ -34,4 +34,19 @@ class AppPresenterBase
         }
         return appViewData
     }
+    
+    internal func _createAppInfoViewData(app: AppInfo) -> AppDetailViewData?
+    {
+        var appViewData : AppDetailViewData?
+        if let icon = app.icon, let title = app.title, let slug = app.slug, let price = app.price
+        {
+            var appStoreURL : String?
+            if let locale = Locale.current.regionCode, let app_id = app.application_id
+            {
+                appStoreURL = getAppStoreAppURL(country: locale, name: slug, id: String(app_id))
+            }
+            appViewData = AppDetailViewData(icon: icon, title: title, description: slug, price: price, appStoreURL: appStoreURL, inapps: nil)
+        }
+        return appViewData
+    }
 }

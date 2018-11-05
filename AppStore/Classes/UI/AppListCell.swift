@@ -26,25 +26,29 @@ class AppListCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    // Configure the cell with a list of apps
     func configure(title : String, apps : [AppDetailViewData])
     {
         cellTitle.text = title
-
-        var startIndex = 0
-        var endIndex = 0
-        repeat
+        
+        if (apps.count > 0)
         {
-            endIndex = min(startIndex + kNumAppsPercolumn, apps.count)
-            _createColumn(apps: Array(apps[startIndex..<endIndex]), view: horizontalView)
-            startIndex = endIndex
+            // getting apps *kNumAppsPercolumn* by *kNumAppsPercolumn* and filling the stack view
+            var startIndex = 0
+            var endIndex = 0
+            repeat
+            {
+                endIndex = min(startIndex + kNumAppsPercolumn, apps.count)
+                _createColumn(apps: Array(apps[startIndex..<endIndex]), view: horizontalView)
+                startIndex = endIndex
+            }
+            while startIndex < apps.count
         }
-        while startIndex < apps.count
     }
     
+    // Create a column in the stack view
     private func _createColumn(apps : [AppDetailViewData], view: UIStackView)
     {
         let stackView = UIStackView()

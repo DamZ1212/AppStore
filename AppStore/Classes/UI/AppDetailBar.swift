@@ -29,13 +29,6 @@ class AppDetailBar: UIView {
     
     var delegate : AppDetailBarDelegate?
     var model : AppDetailViewData?
-    /*
-    // Only override draw() if you perform custom dra?wing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,6 +42,7 @@ class AppDetailBar: UIView {
     
     private func commonInit()
     {
+        // xib loading
         Bundle.main.loadNibNamed("AppDetailBar", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
@@ -97,9 +91,12 @@ class AppDetailBar: UIView {
                 self.appIcon.image = image
             })
         }
-        if let price = model.price, let label = self.getButton.titleLabel
+        if let price = model.price
         {
-            label.text = price
+            if (price != "0,00 €") /* Ugly but we have no info concerning pricetype here...*/
+            {
+                self.getButton.setTitle(price, for: .normal)
+            }
         }
         
     }

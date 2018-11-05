@@ -87,10 +87,13 @@ class AppDetailsViewController: UIViewController {
                     {
                         getImage(from: url, callback:
                         { image in
-                            container.image = image
-                            container.heightAnchor.constraint(equalToConstant: 300).isActive = true
-                            container.widthAnchor.constraint(equalTo: container.heightAnchor, multiplier: container.image!.size.width / container.image!.size.height).isActive = true
-                            stackView.addArrangedSubview(container)
+                            if let image = image
+                            {
+                                container.image = image
+                                container.heightAnchor.constraint(equalToConstant: 300).isActive = true
+                                container.widthAnchor.constraint(equalTo: container.heightAnchor, multiplier: container.image!.size.width / container.image!.size.height).isActive = true
+                                stackView.addArrangedSubview(container)
+                            }
                         })
                     }
                 }

@@ -12,6 +12,7 @@ import Foundation
  Common data types accross all app tweak requests
  */
 
+// app price type
 enum PriceType : String
 {
     case free = "free"
@@ -19,6 +20,7 @@ enum PriceType : String
     case grossing = "grossing"
 }
 
+// Device type according to app tweak
 enum Device : String, CaseIterable
 {
     case ipad           = "ipad"
@@ -29,6 +31,7 @@ enum Device : String, CaseIterable
     case iphone6plus    = "iphone6plus"
 }
 
+// App catgeries
 enum Category : Int
 {
     case all = 0

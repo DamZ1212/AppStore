@@ -218,14 +218,6 @@ class NewGamesServiceTest: XCTestCase {
                 XCTAssertTrue(game.application_id != nil)
                 XCTAssertTrue(game.icon != nil)
                 XCTAssertTrue(game.price != nil)
-                if let genres = game.genres
-                {
-                    XCTAssertTrue(genres.contains(Category.games.rawValue))
-                }
-                else
-                {
-                    XCTFail("Could'nt find game category in app.")
-                }
             }
         }
         else

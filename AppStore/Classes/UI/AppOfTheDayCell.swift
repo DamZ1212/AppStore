@@ -29,7 +29,7 @@ class AppOfTheDayCell: UITableViewCell {
         
         // Background
         self.backgroundImage.clipsToBounds = true
-        self.backgroundImage.contentMode = ContentMode.scaleAspectFit
+        self.backgroundImage.contentMode = ContentMode.scaleAspectFill
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,8 +42,6 @@ class AppOfTheDayCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configure(model : TodayAppViewData)
@@ -53,25 +51,30 @@ class AppOfTheDayCell: UITableViewCell {
         {
             self.cellTitle.text = cell_title.uppercased()
         }
+        // Getting first screenshot from list
         if let screenshot = model.screenshots?[0].url, let url = URL(string: screenshot)
         {
             getImage(from: url, callback: {image in
-                self.backgroundImage.image = image
+                if let image = image
+                {
+                    self.backgroundImage.image = image
+                }
             })
         }
         
-        blur?.removeFromSuperview()
+        self.blur?.removeFromSuperview()
         
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
         let bottomViewFrame = backgroundImage.frame
         let blurSize = 70
         let blurFrame = CGRect(x: 0, y: Int(bottomViewFrame.size.height) - blurSize + 1, width: Int(bottomViewFrame.size.width), height: blurSize)
         
-        blur = UIVisualEffectView(effect: blurEffect)
-        blur!.frame = blurFrame
-        blur!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundImage.addSubview(blur!)
+        self.blur = UIVisualEffectView(effect: blurEffect)
+        self.blur!.frame = blurFrame
+        self.blur!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundImage.addSubview(self.blur!)
         
+        // configuring detail bar
         if let details = model.details
         {
             appDetailBar.configure(model: details)

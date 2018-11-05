@@ -108,9 +108,9 @@ class TodayViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let sec = SectionType(rawValue: indexPath.section)
+        if let sec = SectionType(rawValue: indexPath.section), let section = sections[sec]
         {
-            return CGFloat(sections[sec]?.cellHeight!)
+            return CGFloat(section.cellHeight)
         }
         return CGFloat(kTableViewBaseCellHeight)
     }

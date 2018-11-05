@@ -35,62 +35,87 @@ class PaidGamesPresenter : AppPresenterBase
     }
     
     func getSelectedGamesOfTheWeek(quantity : Int = 12){
-        newGamesSeletionOfTheWeekService.getSelectedAppsOfTheWeek(amount: 50, type: PriceType.paid) { (games: [AppInfo]?) in
+        newGamesSeletionOfTheWeekService.getSelectedAppsOfTheWeek(amount: 30, type: PriceType.paid) { (games: [AppInfo]?, amount: Int) in
             if let games = games
             {
-                var gameDetails = [AppDetails]()
-                var gameViewDatas = [AppDetailViewData]()
-                let formatter : DateFormatter = DateFormatter()
-                formatter.locale = Locale(identifier: "en_US_POSIX")
-                formatter.dateFormat = "yyyy-MM-dd hh:mm:ss zzz"
-                formatter.isLenient = true
-                let today = Date()
-                let lastWeek = Calendar.current.date(byAdding: .day, value: -7, to: today)
-                var index = 0
-                for game in games
+                var gamesDic = [Int:AppInfo]()
+                while gamesDic.count < min(quantity, amount)
                 {
-                    if let game_id = game.application_id
+                    if let randomApp = games.randomElement(), let appId = randomApp.application_id
                     {
-                        self.appService.getAppData(appId: game_id, { (app : AppDetails) in
-                            
-                            guard gameDetails.count < quantity else
-                            {
-                                return
-                            }
-                            
-                            let appReleaseDate = app.storeInfo?.release_date
-                            let date = formatter.date(from: appReleaseDate!)
-                            
-                            if let lastWeek = lastWeek, lastWeek < date!
-                            {
-                                gameDetails.append(app)
-                                
-                                if gameDetails.count == quantity || index == games.count - 1
-                                {
-                                    gameDetails.sort(by: { (app1: AppDetails, app2: AppDetails) -> Bool in
-                                        if let app1date = app1.storeInfo?.release_date, let date1 = formatter.date(from: app1date), let app2date = app2.storeInfo?.release_date, let date2 = formatter.date(from: app2date)
-                                        {
-                                            return date1 > date2
-                                        }
-                                        return false
-                                    })
-                                    
-                                    for gameDetail in gameDetails
-                                    {
-                                        if let mappedGame = self._createAppDetailViewData(app: gameDetail)
-                                        {
-                                            gameViewDatas.append(mappedGame)
-                                        }
-                                    }
-                                    self.paidGameView?.setPaidGames(gameViewDatas)
-                                    return
-                                }
-                            }
-                        })
+                        gamesDic[appId] = randomApp
                     }
-                    index += 1
                 }
+                var returnedGames = [AppDetailViewData]()
+                
+                for (_, value) in gamesDic {
+                    if let appInfoViewData = self._createAppInfoViewData(app: value)
+                    {
+                        returnedGames.append(appInfoViewData)
+                    }
+                }
+                returnedGames.shuffle()
+                self.paidGameView?.setPaidGames(returnedGames)
             }
         }
     }
+    
+//    func getSelectedGamesOfTheWeek(quantity : Int = 12){
+//        newGamesSeletionOfTheWeekService.getSelectedAppsOfTheWeek(amount: 30, type: PriceType.paid) { (games: [AppInfo]?) in
+//            if let games = games
+//            {
+//                var gameDetails = [AppDetails]()
+//                var gameViewDatas = [AppDetailViewData]()
+//                let formatter : DateFormatter = DateFormatter()
+//                formatter.locale = Locale(identifier: "en_US_POSIX")
+//                formatter.dateFormat = "yyyy-MM-dd hh:mm:ss zzz"
+//                formatter.isLenient = true
+//
+//                let today = Date()
+//                let lastWeek = Calendar.current.date(byAdding: .day, value: -7, to: today)
+//                var index = 0
+//                for game in games
+//                {
+//                    if let game_id = game.application_id
+//                    {
+//                        self.appService.getAppData(appId: game_id, { (app : AppDetails) in
+//                            guard gameDetails.count < quantity else
+//                            {
+//                                return
+//                            }
+//                            let appReleaseDate = app.storeInfo?.release_date
+//                            let date = formatter.date(from: appReleaseDate!)
+//
+//                            if let lastWeek = lastWeek, lastWeek < date!
+//                            {
+//                                gameDetails.append(app)
+//
+//                                if gameDetails.count == quantity || index == games.count - 1
+//                                {
+//                                    gameDetails.sort(by: { (app1: AppDetails, app2: AppDetails) -> Bool in
+//                                        if let app1date = app1.storeInfo?.release_date, let date1 = formatter.date(from: app1date), let app2date = app2.storeInfo?.release_date, let date2 = formatter.date(from: app2date)
+//                                        {
+//                                            return date1 > date2
+//                                        }
+//                                        return false
+//                                    })
+//
+//                                    for gameDetail in gameDetails
+//                                    {
+//                                        if let mappedGame = self._createAppDetailViewData(app: gameDetail)
+//                                        {
+//                                            gameViewDatas.append(mappedGame)
+//                                        }
+//                                    }
+//                                    self.paidGameView?.setPaidGames(gameViewDatas)
+//                                    return
+//                                }
+//                            }
+//                        })
+//                    }
+//                    index += 1
+//                }
+//            }
+//        }
+//    }
 }
